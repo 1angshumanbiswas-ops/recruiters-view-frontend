@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background: #e8f5e9; /* light green background */
+  color: #2e7d32;      /* dark green text */
+}
+
+h1 {
+  color: #1b5e20;      /* darker green for heading */
+}
+
+form {
+  margin-bottom: 20px;
+  background: #c8e6c9; /* slightly darker green tab */
+  padding: 15px;
+  border-radius: 6px;
+}
+
+input {
+  margin: 5px;
+  padding: 8px;
+  border: 1px solid #81c784; /* medium green border */
+  border-radius: 4px;
+}
+
+button {
+  padding: 8px 12px;
+  background: #4caf50; /* green button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #388e3c; /* darker green on hover */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #c8e6c9; /* slightly darker green tab for list items */
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
