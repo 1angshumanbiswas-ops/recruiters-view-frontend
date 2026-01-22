@@ -2,19 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Recruiters View Frontend</title>
+  <title>Recruiters Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Recruiters Dashboard</h1>
 
+  <!-- Recruiter Form -->
   <form id="recruiterForm">
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="text" id="company" placeholder="Company" required>
+    <label for="name">Name</label><br>
+    <input type="text" id="name" placeholder="Enter name" required><br><br>
+
+    <label for="email">Email</label><br>
+    <input type="email" id="email" placeholder="Enter email" required><br><br>
+
+    <label for="company">Company</label><br>
+    <input type="text" id="company" placeholder="Enter company" required><br><br>
+
     <button type="submit">Add Recruiter</button>
   </form>
 
+  <!-- Recruiter List -->
   <h2>Recruiter List</h2>
   <ul id="recruiterList"></ul>
 
