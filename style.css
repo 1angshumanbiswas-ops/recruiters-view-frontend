@@ -1,50 +1,184 @@
+/* 🌿 Green-Themed Responsive Dashboard Stylesheet */
+
+/* Theme variables for easy tweaking */
+:root {
+  --primary: #2e7d32;      /* dark green */
+  --secondary: #c8e6c9;    /* light green tab */
+  --accent: #4caf50;       /* button green */
+  --hover: #388e3c;        /* darker hover green */
+  --bg: #e8f5e9;           /* page background */
+}
+
+/* Base layout */
 body {
   font-family: Arial, sans-serif;
   margin: 40px;
-  background: #e8f5e9; /* light green background */
-  color: #2e7d32;      /* dark green text */
+  background: var(--bg);
+  color: var(--primary);
 }
 
-h1 {
-  color: #1b5e20;      /* darker green for heading */
+h1, h2, h3 {
+  color: #1b5e20;
+  margin-bottom: 15px;
 }
 
+/* Container for dashboard */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* Section tabs or headers */
+.tab-header {
+  background: var(--primary);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px 6px 0 0;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Forms */
 form {
   margin-bottom: 20px;
-  background: #c8e6c9; /* slightly darker green tab */
+  background: var(--secondary);
   padding: 15px;
   border-radius: 6px;
 }
 
-input {
-  margin: 5px;
-  padding: 8px;
-  border: 1px solid #81c784; /* medium green border */
+/* Input groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+.input-group input {
+  padding: 10px;
+  border: 1px solid #81c784;
   border-radius: 4px;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+.input-group input:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
+/* Buttons */
 button {
   padding: 8px 12px;
-  background: #4caf50; /* green button */
+  background: var(--accent);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-
 button:hover {
-  background: #388e3c; /* darker green on hover */
+  background: var(--hover);
 }
 
+/* Sign Out button */
+.signout-button {
+  margin-top: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.signout-button:hover {
+  background: var(--hover);
+}
+
+/* Cards for recruiter/candidate panels */
+.card {
+  background: #ffffff;
+  border-left: 5px solid var(--primary);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Lists */
 ul {
   list-style-type: none;
   padding: 0;
 }
-
 li {
-  background: #c8e6c9; /* slightly darker green tab for list items */
+  background: var(--secondary);
   margin: 5px 0;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Split layout for recruiter vs candidate */
+.split-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+}
+.split-panel > div {
+  flex: 1;
+  background: var(--secondary);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    margin: 20px;
+  }
+  form, .card {
+    padding: 10px;
+  }
+  input, button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  li {
+    font-size: 14px;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .split-panel {
+    flex-direction: column;
+  }
 }

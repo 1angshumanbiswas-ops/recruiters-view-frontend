@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>Admin Dashboard</h2>
+    <a href="login.html">Logout</a>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Recruiter Tracking Section -->
+    <h1>Recruiter Tracking</h1>
+    <div id="recruiterList" class="card">
+      <h2>All Recruiters (Superadmin View)</h2>
+      <table id="recruiterTable" border="1" cellspacing="0" cellpadding="8">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Company</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Recruiter rows will be injected here by admin-dashboard.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Candidate CV Management Section -->
+    <h2>Candidate CV Management</h2>
+    <div id="cvList" class="card">
+      <p>Candidate CVs will load here with delete options.</p>
+      <!-- You can later add a table or list for CVs -->
+    </div>
+  </div>
+
+  <!-- JS Logic -->
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

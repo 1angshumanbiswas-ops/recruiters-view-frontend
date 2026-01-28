@@ -1,24 +1,61 @@
-const API_URL = "https://recruiters-view-backend.onrender.com/api/login";
+// Recruiter Views - Login Logic
 
+const backendURL = "https://recruiters-view-backend.onrender.com";
+
+// Email + Password Login
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-
-  const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("password").value;
 
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, phone }),
-  });
+  // Admin bypass
+  if (email === "1angshuman.biswas@gmail.com") {
+    window.location.href = "admin-dashboard.html";
+    return;
+  }
 
-  if (response.ok) {
-    // Save recruiter info in localStorage for session tracking
-    localStorage.setItem("recruiter", JSON.stringify({ name, email, phone }));
-    // Redirect to dashboard
-    window.location.href = "index.html";
-  } else {
-    alert("Login failed. Please try again.");
+  try {
+    const res = await fetch(`${backendURL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+      window.location.href = "visitors.html";
+    } else {
+      alert(data.message || "Login failed");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error connecting to server");
+  }
+});
+
+// Mobile + OTP Login
+document.getElementById("otpForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const mobile = document.getElementById("mobile").value;
+  const otp = document.getElementById("otp").value;
+
+  try {
+    const res = await fetch(`${backendURL}/otp-login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mobile, otp }),
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+      window.location.href = "visitors.html";
+    } else {
+      alert(data.message || "OTP login failed");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error connecting to server");
   }
 });

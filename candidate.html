@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Candidate Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="navbar">
+    <h2>Candidate Dashboard</h2>
+    <a href="index.html">Logout</a>
+  </div>
+
+  <div class="container">
+    <h1>Manage Your CVs</h1>
+    <form id="uploadForm">
+      <input type="file" id="cvFile" accept=".pdf,.doc,.docx" required />
+      <button type="submit">Upload CV</button>
+    </form>
+
+    <div id="cvList" class="card">
+      <!-- Candidate CVs will load here -->
+    </div>
+  </div>
+
+  <script src="candidate.js"></script>
+</body>
+</html>

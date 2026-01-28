@@ -1,31 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Recruiters Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recruiter Views</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tab-container {
+      background: var(--secondary);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab-buttons button {
+      flex: 1;
+      padding: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      transition: background 0.3s ease;
+    }
+    .tab-buttons button.active {
+      background: var(--primary);
+    }
+    .tab-buttons button:hover {
+      background: var(--hover);
+    }
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <h1>Recruiters Dashboard</h1>
+  <div class="navbar">
+    <h2>Recruiter Views</h2>
+  </div>
 
-  <!-- Recruiter Form -->
-  <form id="recruiterForm">
-    <label for="name">Name</label><br>
-    <input type="text" id="name" placeholder="Enter name" required><br><br>
+  <div class="container">
+    <h1>Welcome</h1>
+    <div class="tab-container">
+      <!-- Tab buttons -->
+      <div class="tab-buttons">
+        <button id="candidateTab" class="active">Candidate Login</button>
+        <button id="recruiterTab">Recruiter Login</button>
+      </div>
 
-    <label for="email">Email</label><br>
-    <input type="email" id="email" placeholder="Enter email" required><br><br>
+      <!-- Candidate Login Form -->
+      <div id="candidateContent" class="tab-content active">
+        <form id="candidateLoginForm">
+          <label>Email:</label><br>
+          <input type="email" id="candidateEmail" required><br>
+          <label>Password:</label><br>
+          <input type="password" id="candidatePassword" required><br>
+          <button type="submit">Login as Candidate</button>
+        </form>
+      </div>
 
-    <label for="company">Company</label><br>
-    <input type="text" id="company" placeholder="Enter company" required><br><br>
+      <!-- Recruiter Login Form -->
+      <div id="recruiterContent" class="tab-content">
+        <form id="recruiterLoginForm">
+          <label>Email:</label><br>
+          <input type="email" id="recruiterEmail" required><br>
+          <label>Password:</label><br>
+          <input type="password" id="recruiterPassword"><br>
+          <button type="submit">Login as Recruiter</button>
+        </form>
 
-    <button type="submit">Add Recruiter</button>
-  </form>
+        <form id="recruiterOtpForm">
+          <label>Mobile Number:</label><br>
+          <input type="text" id="recruiterMobile" required><br>
+          <label>6-digit OTP:</label><br>
+          <input type="text" id="recruiterOtp"><br>
+          <button type="submit">Login with OTP</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-  <!-- Recruiter List -->
-  <h2>Recruiter List</h2>
-  <ul id="recruiterList"></ul>
+  <script>
+    // Tab switching logic
+    const candidateTab = document.getElementById("candidateTab");
+    const recruiterTab = document.getElementById("recruiterTab");
+    const candidateContent = document.getElementById("candidateContent");
+    const recruiterContent = document.getElementById("recruiterContent");
 
-  <script src="script.js"></script>
+    candidateTab.addEventListener("click", () => {
+      candidateTab.classList.add("active");
+      recruiterTab.classList.remove("active");
+      candidateContent.classList.add("active");
+      recruiterContent.classList.remove("active");
+    });
+
+    recruiterTab.addEventListener("click", () => {
+      recruiterTab.classList.add("active");
+      candidateTab.classList.remove("active");
+      recruiterContent.classList.add("active");
+      candidateContent.classList.remove("active");
+    });
+  </script>
+  <script src="candidate-login.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
