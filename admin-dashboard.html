@@ -15,6 +15,19 @@
 
   <!-- Main Container -->
   <div class="container">
+    <!-- Recruiter Registration Section -->
+    <h1>Register a New Recruiter</h1>
+    <form id="registerForm" style="margin-bottom: 30px;">
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter recruiter email"
+        required
+        style="padding: 8px; width: 300px;"
+      />
+      <button type="submit" style="padding: 8px 16px;">Register</button>
+    </form>
+
     <!-- Recruiter Tracking Section -->
     <h1>Recruiter Tracking</h1>
     <div id="recruiterList" class="card">
@@ -43,6 +56,27 @@
   </div>
 
   <!-- JS Logic -->
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+
+      fetch("https://recruiters-view-backend-1.onrender.com/api/recruiters/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message || "Recruiter registered.");
+        document.getElementById("registerForm").reset();
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Registration failed. Please check the console for details.");
+      });
+    });
+  </script>
   <script src="admin-dashboard.js"></script>
 </body>
 </html>
