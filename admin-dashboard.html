@@ -3,80 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard</title>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .dashboard-columns {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+    }
+    .column {
+      flex: 1;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    input, button {
+      padding: 8px;
+      margin-top: 10px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
+  <script>
+    const id = localStorage.getItem("userIdentifier");
+    const role = localStorage.getItem("userRole");
+
+    if (!id || !role) {
+      alert("Please log in first.");
+      window.location.href = "login.html";
+    }
+  </script>
+
   <!-- Navbar -->
   <div class="navbar">
-    <h2>Admin Dashboard</h2>
+    <h2 id="dashboardTitle">Dashboard</h2>
     <a href="login.html">Logout</a>
   </div>
 
-  <!-- Main Container -->
-  <div class="container">
-    <!-- Recruiter Registration Section -->
-    <h1>Register a New Recruiter</h1>
-    <form id="registerForm" style="margin-bottom: 30px;">
-      <input
-        type="email"
-        id="email"
-        placeholder="Enter recruiter email"
-        required
-        style="padding: 8px; width: 300px;"
-      />
-      <button type="submit" style="padding: 8px 16px;">Register</button>
-    </form>
-
-    <!-- Recruiter Tracking Section -->
-    <h1>Recruiter Tracking</h1>
-    <div id="recruiterList" class="card">
-      <h2>All Recruiters (Superadmin View)</h2>
-      <table id="recruiterTable" border="1" cellspacing="0" cellpadding="8">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Company</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Recruiter rows will be injected here by admin-dashboard.js -->
-        </tbody>
-      </table>
+  <!-- Two-column layout -->
+  <div class="container dashboard-columns">
+    <!-- Left Column -->
+    <div class="column" id="leftColumn">
+      <!-- Content will be injected based on role -->
     </div>
 
-    <!-- Candidate CV Management Section -->
-    <h2>Candidate CV Management</h2>
-    <div id="cvList" class="card">
-      <p>Candidate CVs will load here with delete options.</p>
-      <!-- You can later add a table or list for CVs -->
+    <!-- Right Column -->
+    <div class="column" id="rightColumn">
+      <!-- Content will be injected based on role -->
     </div>
   </div>
 
-  <!-- JS Logic -->
   <script>
-    document.getElementById("registerForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value.trim();
+    const left = document.getElementById("leftColumn");
+    const right = document.getElementById("rightColumn");
+    const title = document.getElementById("dashboardTitle");
 
-      fetch("https://recruiters-view-backend-1.onrender.com/api/recruiters/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-      })
-      .then(res => res.json())
-      .then(data => {
-        alert(data.message || "Recruiter registered.");
-        document.getElementById("registerForm").reset();
-      })
-      .catch(err => {
-        console.error(err);
-        alert("Registration failed. Please check the console for details.");
+    if (role === "recruiter") {
+      title.textContent = "Recruiter Dashboard";
+
+      left.innerHTML = `
+        <h2>Welcome, Recruiter</h2>
+        <p>Your ID: <strong>${id}</strong></p>
+        <form id="registerForm">
+          <input type="email" id="email" placeholder="Register another recruiter (email)" required />
+          <button type="submit">Register</button>
+        </form>
+      `;
+
+      right.innerHTML = `
+        <h2>Candidate CV Management</h2>
+        <p>Candidate CVs will load here with delete options.</p>
+      `;
+
+      document.getElementById("registerForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const email = document.getElementById("email").value.trim();
+
+        fetch("https://recruiters-view-backend-1.onrender.com/api/recruiters/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message || "Recruiter registered.");
+          document.getElementById("registerForm").reset();
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Registration failed. Please check the console for details.");
+        });
       });
-    });
+
+    } else if (role === "candidate") {
+      title.textContent = "Candidate Dashboard";
+
+      left.innerHTML = `
+        <h2>Welcome, Candidate</h2>
+        <p>Your ID: <strong>${id}</strong></p>
+        <p>You can upload your CV or check recruiter responses here.</p>
+      `;
+
+      right.innerHTML = `
+        <h2>CV Upload</h2>
+        <p>Upload form will go here.</p>
+      `;
+    }
   </script>
-  <script src="admin-dashboard.js"></script>
 </body>
 </html>
